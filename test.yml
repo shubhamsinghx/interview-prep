@@ -1,0 +1,34 @@
+name: daily run
+ 
+ on: runs every day at 12pm IST (can be adjustd as per the requiremnet)
+
+jobs:
+run daily : windows-latest
+time out: 15 mins
+
+
+steps:  
+name: checkout branch name
+use: acions/checkout
+with node version: "20"
+cache: "npm"
+
+install dependencies
+run: npm ci
+
+name: install playwirhgt browsers
+run: npx playwright install --
+
+name: run daily job
+run: npm run daily
+
+uploads: ulpoads aritfacts
+if : always
+uses: action/checkout
+with
+name: test-artifacts
+path:
+playwright rpeort
+screenshots
+test-rersults
+
